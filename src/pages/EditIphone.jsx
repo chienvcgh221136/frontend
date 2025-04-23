@@ -10,6 +10,7 @@ const EditIphone = () => {
     storage: '',
     color: '',
     price: '',
+    image: '',
     releaseDate: ''
   });
   const [loading, setLoading] = useState(true);

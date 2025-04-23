@@ -9,6 +9,7 @@ const AddIphone = () => {
     storage: '',
     price: '',
     color: '',
+    image: '',
     releaseDate: ''
   });
 
