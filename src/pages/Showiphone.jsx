@@ -9,6 +9,7 @@ const Showiphone = () => {
     storage: '',
     price: '',
     color: '',
+    image: '',
     releaseDate: ''
   });
 
@@ -26,6 +27,7 @@ const Showiphone = () => {
     { label: 'Storage (GB)', key: 'storage', type: 'number' },
     { label: 'Price ($)', key: 'price', type: 'number' },
     { label: 'Color', key: 'color', type: 'text' },
+    { label: 'Image', key: 'image', type: 'text' },
     { label: 'Release Date', key: 'releaseDate', type: 'date' },
   ];
 

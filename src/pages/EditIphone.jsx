@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditIphone = () => {
+
   const { id } = useParams();
+  
   const [iphone, setIphone] = useState({
     model: '',
     storage: '',
@@ -14,37 +16,39 @@ const EditIphone = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/iphone/${id}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/iphone/${id}`) 
       .then(response => response.json())
       .then(data => {
         if (data) {
-          setIphone(data);
+          setIphone(data); 
         }
-        setLoading(false);
+        setLoading(false); 
       })
       .catch(error => {
-        console.error('Error fetching iPhone data:', error);
-        setLoading(false);
+        console.error('Error fetching iPhone data:', error); 
+        setLoading(false); 
       });
-  }, [id]);
+  }, [id]); 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const updatedIphone = { ...iphone };
+    e.preventDefault(); 
+    const updatedIphone = { ...iphone }; 
 
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/iphone/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedIphone),
+        body: JSON.stringify(updatedIphone), 
       });
-      const result = await response.json();
+      
+      const result = await response.json(); 
+      
       if (result.message === 'iPhone updated successfully!') {
         alert('iPhone updated successfully!');
         navigate('/');
       }
     } catch (error) {
-      console.error('Error updating iPhone:', error);
+      console.error('Error updating iPhone:', error); 
     }
   };
 
@@ -57,6 +61,7 @@ const EditIphone = () => {
     { label: 'Storage (GB)', key: 'storage', type: 'select', placeholder: '' },
     { label: 'Price ($)', key: 'price', type: 'number', placeholder: '999' },
     { label: 'Color', key: 'color', type: 'text', placeholder: 'Graphite' },
+    { label: 'Image', key: 'image', type: 'text', placeholder: '' },
     { label: 'Release Date', key: 'releaseDate', type: 'date', placeholder: '' },
   ];
 
@@ -65,6 +70,7 @@ const EditIphone = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-7 text-center bg-gradient-to-b from-cyan-100/70">
       <h1 className="text-2xl font-bold text-blue-600">Edit iPhone</h1>
+      
       <form onSubmit={handleSubmit} className="mt-5 w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
         {fields.map(({ label, key, type, placeholder }) => (
           <div key={key} className="mb-4 flex flex-col items-center sm:gap-4">
@@ -73,8 +79,8 @@ const EditIphone = () => {
             {key === 'storage' ? (
               <select
                 id={key}
-                value={iphone[key]}
-                onChange={(e) => setIphone({ ...iphone, [key]: e.target.value })}
+                value={iphone[key]} 
+                onChange={(e) => setIphone({ ...iphone, [key]: e.target.value })} 
                 required
                 className="w-3/4 p-2 border border-gray-300 rounded-md"
               >
@@ -89,15 +95,16 @@ const EditIphone = () => {
               <input
                 type={type}
                 id={key}
-                value={iphone[key]}
-                onChange={(e) => setIphone({ ...iphone, [key]: e.target.value })}
+                value={iphone[key]} 
+                onChange={(e) => setIphone({ ...iphone, [key]: e.target.value })} 
                 required
-                placeholder={placeholder}
+                placeholder={placeholder} 
                 className="w-3/4 p-2 border border-gray-300 rounded-md"
               />
             )}
           </div>
         ))}
+        
         <div className="flex justify-center mt-6">
           <button
             type="submit"
